@@ -1,5 +1,94 @@
+-- VISUAL MENU + SPEED + FLY + NOCLIP + ESP (FIXED) + HP + GodMode + Loader + Watermark
 
--- VISUAL MENU + SPEED + FLY + NOCLIP + ESP (FIXED) + HP + GodMode
+-- ===== LOADER =====
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+local LP = Players.LocalPlayer
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "LoaderGui"
+gui.ResetOnSpawn = false
+gui.Parent = LP:WaitForChild("PlayerGui")
+
+local frame = Instance.new("Frame", gui)
+frame.Size = UDim2.new(0, 320, 0, 170)
+frame.Position = UDim2.new(0.5, 0, 0.5, 0)
+frame.BackgroundColor3 = Color3.fromRGB(18,18,18)
+frame.BorderSizePixel = 0
+frame.AnchorPoint = Vector2.new(0.5, 0.5)
+Instance.new("UICorner", frame).CornerRadius = UDim.new(0,14)
+
+local title = Instance.new("TextLabel", frame)
+title.Size = UDim2.new(1,0,0,40)
+title.Position = UDim2.new(0,0,0,10)
+title.Text = "MultiMenu"
+title.Font = Enum.Font.GothamBold
+title.TextSize = 20
+title.TextColor3 = Color3.fromRGB(255,255,255)
+title.BackgroundTransparency = 1
+
+local status = Instance.new("TextLabel", frame)
+status.Size = UDim2.new(1,0,0,20)
+status.Position = UDim2.new(0,0,0,45)
+status.Text = "Injecting..."
+status.Font = Enum.Font.Gotham
+status.TextSize = 14
+status.TextColor3 = Color3.fromRGB(180,180,180)
+status.BackgroundTransparency = 1
+
+-- progress bar bg
+local barBG = Instance.new("Frame", frame)
+barBG.Size = UDim2.new(0.88,0,0,14)
+barBG.Position = UDim2.new(0.06,0,0.72,0)
+barBG.BackgroundColor3 = Color3.fromRGB(35,35,35)
+barBG.BorderSizePixel = 0
+Instance.new("UICorner", barBG).CornerRadius = UDim.new(1,0)
+
+-- progress bar fill
+local bar = Instance.new("Frame", barBG)
+bar.Size = UDim2.new(0,0,1,0)
+bar.BackgroundColor3 = Color3.fromRGB(0,170,255)
+bar.BorderSizePixel = 0
+Instance.new("UICorner", bar).CornerRadius = UDim.new(1,0)
+
+local percent = Instance.new("TextLabel", frame)
+percent.Size = UDim2.new(1,0,0,20)
+percent.Position = UDim2.new(0,0,0.85,0)
+percent.Text = "Loading 0%"
+percent.Font = Enum.Font.Gotham
+percent.TextSize = 13
+percent.TextColor3 = Color3.fromRGB(160,160,160)
+percent.BackgroundTransparency = 1
+
+-- progress animation
+for i = 1, 100 do
+	bar:TweenSize(
+		UDim2.new(i/100,0,1,0),
+		Enum.EasingDirection.Out,
+		Enum.EasingStyle.Quad,
+		0.03,
+		true
+	)
+	percent.Text = "Loading "..i.."%"
+	task.wait(0.03)
+end
+
+status.Text = "Done ✔"
+task.wait(0.4)
+
+-- fade out
+for _,v in pairs(frame:GetDescendants()) do
+	if v:IsA("TextLabel") then
+		TweenService:Create(v, TweenInfo.new(0.4), {TextTransparency = 1}):Play()
+	elseif v:IsA("Frame") then
+		TweenService:Create(v, TweenInfo.new(0.4), {BackgroundTransparency = 1}):Play()
+	end
+end
+
+task.wait(0.5)
+gui:Destroy()
+-- ===== END LOADER =====
+
 
 local Players = game:GetService("Players")
 local UIS = game:GetService("UserInputService")
