@@ -5068,7 +5068,7 @@ try{router();refresh()}catch(err){showErr(err)}
   e.preventDefault();
  });
  document.addEventListener('keydown',function(e){
-  var k=e.key.toLowerCase();
+var k = (e.key || '').toLowerCase();
   var blocked=e.key==='F12'||(e.ctrlKey&&e.shiftKey&&(k==='i'||k==='j'||k==='c'))||(e.ctrlKey&&(k==='u'||k==='s'))||(e.ctrlKey&&k==='p');
   if(blocked&&cfg.protect!==false){e.preventDefault();toast('Заблокировано защитой','err')}
  });
